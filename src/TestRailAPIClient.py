@@ -2,6 +2,7 @@
 
 from requests import post, get
 from typing import Any, cast, Dict, List, Optional, Sequence, Union
+from re import sub
 
 DEFAULT_TESTRAIL_HEADERS = {'Content-Type': 'application/json'}
 TESTRAIL_STATUS_ID_PASSED = 1
@@ -32,7 +33,7 @@ class TestRailAPIClient(object):
             _run_id_ - ID of the test run;\n
             _protocol_ - connecting protocol to TestRail server: http or https.
         """
-        self._url = '{protocol}://{server}/testrail/index.php?/api/v2/'.format(protocol=protocol, server=server)
+        self._url = '{protocol}://{server}/index.php?/api/v2/'.format(protocol=protocol, server=server)
         self._user = user
         self._password = password
         self.run_id = run_id
@@ -129,6 +130,9 @@ class TestRailAPIClient(object):
         | Add Result For Case | run_id=321 | case_id=123| test_result={'status_id': 3, 'comment': 'This test is untested', 'defects': 'DEF-123'} |
         """
         uri = 'add_result_for_case/{run_id}/{case_id}'.format(run_id=run_id, case_id=case_id)
+
+        test_result_fields['comment'] = sub('[^A-Za-z0-9 \n.]+', '', test_result_fields['comment'])
+        print(test_result_fields['comment'])
         self._send_post(uri, test_result_fields)
 
     def get_statuses(self) -> JsonList:
@@ -195,7 +199,7 @@ class TestRailAPIClient(object):
         *Returns:* \n
             Test status ID.
         """
-        last_case_result = self.get_results_for_case(run_id=run_id, case_id=case_id, limit=1)
+        last_case_result = self.get_results_for_case(run_id=run_id, case_id=case_id, limit=1)['results']
         return last_case_result[0]['status_id'] if last_case_result else None
 
     def get_project(self, project_id: Id) -> JsonDict:

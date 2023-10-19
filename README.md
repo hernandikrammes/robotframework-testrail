@@ -4,6 +4,7 @@
 
 Short Description
 ---
+Updated fork of [robotframework-testrail](https://github.com/peterservice-rnd/robotframework-testrail)
 
 [Robot Framework](http://www.robotframework.org) library, listener and pre-run modifier for working with TestRail.
 

@@ -1,4 +1,6 @@
-# RobotFramework Testrail
+# RobotFramework Testrail NG
+
+This library is a direct fork from peterservice-rnd library, and contains some bug fixes related to new versions of Testrails.
 
 [![Build Status](https://travis-ci.org/peterservice-rnd/robotframework-testrail.svg?branch=master)](https://travis-ci.org/peterservice-rnd/robotframework-testrail)
 
@@ -11,13 +13,8 @@ Installation
 ---
 
 ```
-pip install robotframework-testrail
+pip install robotframework-testrail-ng
 ```
-
-Documentation
----
-
-See documentation on [GitHub](https://github.com/peterservice-rnd/robotframework-testrail/tree/master/docs).
 
 Usage
 ---
@@ -63,7 +60,7 @@ Fixing of testing results and updating test cases.
 3. Run Robot Framework with listener:
 
     ```
-    pybot --listener TestRailListener.py:testrail_server_name:tester_user_name:tester_user_password:run_id:https:update  robot_suite.robot
+    robot --listener TestRailListener.py:testrail_server_name:tester_user_name:tester_user_password:run_id:https:update  robot_suite.robot
     ```
 
     Test with case_id=10 will be marked as failed in TestRail with message "Test fail message" and defects "BUG-1, BUG-2".
@@ -92,7 +89,7 @@ Pre-run modifier for starting test cases from a certain test run.
 2. Run Robot Framework with pre-run modifier:
 
     ```
-    pybot --prerunmodifier TestRailPreRunModifier:testrail_server_name:tester_user_name:tester_user_password:run_id:http:results_depth robot_suite.robot
+    robot --prerunmodifier TestRailPreRunModifier:testrail_server_name:tester_user_name:tester_user_password:run_id:http:results_depth robot_suite.robot
     ```
 
     Only test cases that are included in the test run _run_id_ will be executed.
@@ -100,7 +97,7 @@ Pre-run modifier for starting test cases from a certain test run.
 3. To execute tests from TestRail test run only with a certain status, for example "failed" and "blocked":
 
     ```
-    pybot --prerunmodifier TestRailPreRunModifier:testrail_server_name:tester_user_name:tester_user_password:run_ind:http:results_depth:failed:blocked robot_suite.robot
+    robot --prerunmodifier TestRailPreRunModifier:testrail_server_name:tester_user_name:tester_user_password:run_ind:http:results_depth:failed:blocked robot_suite.robot
     ```
 
 License

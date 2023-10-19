@@ -17,12 +17,12 @@ with open(path.join(here, 'requirements.txt')) as f:
     requirements = f.read().splitlines()
 
 setup(
-    name='robotframework-testrail',
-    version='2.0.1',
+    name='robotframework-testrail-ng',
+    version='2.0.2',
     description='Robot Framework library, listener and pre-run modifier for working with TestRail',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/peterservice-rnd/robotframework-testrail',
+    url='https://github.com/hernandikrammes/robotframework-testrail-ng',
     author='JSC PETER-SERVICE',
     author_email='drse_aist_all@billing.ru',
     license='Apache License 2.0',
